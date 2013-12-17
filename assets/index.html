@@ -1,0 +1,37 @@
+<script src="http://flows.liquidsoap.fm/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+  var socket = io.connect("http://flows.liquidsoap.fm");
+
+  socket.emit('join', "e710da7b9e83debd5dcb4a5455e9998caba8fca7");
+
+  socket.on('joined', function (data) {
+	  Android.showLog("joined .... artist: " + data.artist + "title: " + data.title);
+	  Android.nuevosMetadatos();
+  });
+  socket.on('error', function (data) {
+      Android.showLog("Ha ocurrido un error con la conexión: " + data + ".");
+  });
+  socket.on('disconnect', function () {
+	  Android.showLog("Se ha perdido la conexión con el socket.");
+  });
+  socket.on('reconnecting', function () {
+	  Android.showLog("Se ha iniciado la reconexión con el socket.");
+  });
+  socket.on('reconnect', function () {
+	  Android.showLog("La reconexión con el socket ha sido exitosa.");
+      socket.emit('join', "e710da7b9e83debd5dcb4a5455e9998caba8fca7");
+  });
+  socket.on('reconnect_failed', function () {
+	  Android.showLog("La reconexión con el socket ha fallado.");
+  });
+  socket.on("e710da7b9e83debd5dcb4a5455e9998caba8fca7", function (data) {
+      if (data.cmd === "metadata") {
+    	  Android.showLog("artist: " + data.artist + "title: " + data.title);
+          Android.showLog("Se han recibidos nuevos metadatos desde el servidor.");
+          Android.nuevosMetadatos();
+      } else if (data.cmd === "ping radio") {
+    	  Android.showLog("Se he recibido una solicitud de ping desde el servidor.");
+      }
+  });
+  
+</script>

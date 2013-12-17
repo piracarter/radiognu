@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RadioÑu</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="play">play</string>
+	
+	<!-- CADENAS TEMPORALES -->
+	<string name="testing">Texto de prueba para el fragmento playerfragment</string>
+	
+	<!-- CADENAS DE LA INTERFAZ GENERAL-->
+	<string name="subtitle">La emisora del ñu que te da nota</string>
+	<string name="contentImagePlayer">Imagen del track que actualmente esta tocando</string>
+	<string name="estadoReproductor">Ahora Reproduciendo</string>
+	<string name="estadoVivoReproductor">EN VIVO</string>
+	<string name="TituloTrack">Titulo del Track</string>
+	<string name="AlbumTrack">Album del Track</string>
+	<string name="ArtistaTrack">Artista</string>
+	<string name="Country">Pais</string>
+	<string name="yearlicence">Año y Licencia</string>
+	<string name="contentImagePlayStop">Imagen del boton play y stop</string>
+	<string name="MessageRadio">Radio Online</string>
+	<string name="MessageRadioPlay">Escuchando Radio</string>
+	
+	<!-- CADENAS DE SERVICEPLAYERSTREAMING -->
+	<string name="exit_service">Saliendo de RadioÑu</string>
+	
+	<!-- CADENAS CONECTIVIDAD -->
+	<string name="URL_AUDIO">http://audio.radiognu.org/radiometagnu2.ogg</string>
+	<!-- string name="URL_AUDIO">http://192.168.43.214:8080</string-->
+</resources>
