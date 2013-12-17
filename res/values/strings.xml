@@ -27,6 +27,9 @@
 	<string name="exit_service">Saliendo de RadioÑu</string>
 	
 	<!-- CADENAS CONECTIVIDAD -->
-	<string name="URL_AUDIO">http://audio.radiognu.org/radiometagnu2.ogg</string>
-	<!-- string name="URL_AUDIO">http://192.168.43.214:8080</string-->
+	<string name="URL_AUDIO">http://192.168.43.214:8080</string>
+	
+	<!-- CADENAS CONECTIVIDAD -->
+	<!--  string name="URL_AUDIO">http://audio.radiognu.org/radiometagnu2.ogg</string-->
+
 </resources>
