@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#000000"
     android:orientation="vertical"
     android:layout_height="match_parent"
 	android:layout_width="match_parent" >
   
-  <LinearLayout 
+  <!--LinearLayout 
       android:layout_height="0px"
       android:layout_width="match_parent"
       android:layout_weight="1"
@@ -23,7 +24,7 @@
 	            android:layout_marginLeft="10dp"
 	            style="@style/NoLive"
 	         />
-  </LinearLayout>
+  </LinearLayout-->
   
   <LinearLayout 
     	android:baselineAligned="false"
@@ -33,7 +34,7 @@
 	    android:layout_width="match_parent">
 
         <LinearLayout
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -46,13 +47,13 @@
             	android:layout_height="match_parent"
             	android:contentDescription="@string/contentImagePlayer"
             	android:scaleType="fitXY"
-            	android:src="@drawable/radiognuavatar" />
+            	android:src="@drawable/radiognu" />
         	
         </LinearLayout>
         
         <LinearLayout
             	android:layout_marginLeft="3dp"
-				android:layout_weight="1"
+				android:layout_weight="2"
             	android:layout_width="0px"
             	android:layout_height="wrap_content"
             	android:orientation="vertical" >
@@ -62,6 +63,7 @@
 	            	android:layout_width="wrap_content"
 	            	android:layout_height="wrap_content"
 	            	android:text="@string/TituloTrack"
+	            	style="@style/textNormalFragmentPlayer"
 		    	/>
 				<TextView 
 		        	android:id="@+id/textArtista"
@@ -69,6 +71,7 @@
 	            	android:layout_height="wrap_content"
 	            	android:text="@string/ArtistaTrack"
 	            	android:layout_weight="1"
+	            	style="@style/textNormalFragmentPlayer"
 		    	/>
 		
 				<TextView 
@@ -76,7 +79,8 @@
 	            	android:layout_width="wrap_content"
 	            	android:layout_height="wrap_content"
 	            	android:text="@string/AlbumTrack"
-	            	android:layout_weight="1"        
+	            	android:layout_weight="1"
+	            	style="@style/textNormalFragmentPlayer"        
 		    	/>
 		
 				<TextView 
@@ -85,6 +89,7 @@
 	            	android:layout_height="wrap_content"
 	            	android:text="@string/Country"
 	            	android:layout_weight="1"
+	            	style="@style/textNormalFragmentPlayer"
 		    	/>
 		
 				<TextView 
@@ -93,6 +98,7 @@
 	            	android:layout_height="wrap_content"
 	            	android:text="@string/yearlicence"
 	            	android:layout_weight="1"
+	            	style="@style/textNormalFragmentPlayer"
 		    	/>
 		
 				<WebView
@@ -104,25 +110,43 @@
         </LinearLayout>
         		
 </LinearLayout>
-<LinearLayout
+<RelativeLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
       android:layout_height="0px"
-      android:layout_weight="1">
+      android:layout_weight="2">
     <ImageView
+        	android:layout_centerInParent="true"
             android:id="@+id/imageControlRadio"
             android:contentDescription="@string/contentImagePlayStop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/play32" />
-	<TextView 
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_media_play" />
+	<!--TextView 
 	    	android:layout_marginTop="5dp"
 	    	android:layout_marginLeft="10dp"
 	        android:id="@+id/textMessageRadio"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/MessageRadio" />
-  </LinearLayout>           
+	        android:text="@string/MessageRadio" /-->
+
+    </RelativeLayout>
+    <LinearLayout 
+        android:orientation="vertical"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+	    android:layout_width="match_parent"
+	    android:layout_height="0px"
+	    android:layout_weight="1">
+        
+        <SeekBar
+            android:id="@+id/sbVolume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageControlRadio"
+            android:layout_alignParentLeft="true" />
+        
+    </LinearLayout>           
 </LinearLayout>
 
         

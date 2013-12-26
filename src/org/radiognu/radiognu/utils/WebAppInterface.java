@@ -41,7 +41,6 @@ public class WebAppInterface {
     }
     @JavascriptInterface
     public void showLog(String message) { 
-    	Log.d("JavaScriptInterface",message);
     }
     @JavascriptInterface
     public void nuevosMetadatos() { 

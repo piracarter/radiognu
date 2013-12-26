@@ -1,5 +1,6 @@
 package org.radiognu.radiognu.utils;
 
+import org.radiognu.radiognu.MainActivity;
 import org.radiognu.radiognu.R;
 import org.radiognu.radiognu.model.track;
 
@@ -16,10 +17,18 @@ public class RequestTaskAPI extends AsyncTask<String, Void, String> {
     
     private track current_track;
     private View view;
-
+	//private ProgressDialog progressDialog;
+    
     public RequestTaskAPI(View view){
     	this.view = view;
     }
+    @Override
+    protected void onPreExecute() {
+       	super.onPreExecute();
+       	//progressDialog = new ProgressDialog(view.getContext());
+		//progressDialog.setTitle(view.getResources().getString(R.string.message_conn));
+		//progressDialog.show();
+	}
     @Override
     protected String doInBackground(String... uri)
     {
@@ -30,8 +39,8 @@ public class RequestTaskAPI extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String response)
     {
     	super.onPostExecute(response);
+    	//progressDialog.dismiss();
     	current_track = utilsradiognu.updateTrack(response);
-    	Log.d("Debug", "Pasando por onPostExecute " + current_track.getTitle());
     	TextView textTitulo = (TextView) view.findViewById(R.id.textTitulo);
     	TextView textArtista = (TextView) view.findViewById(R.id.textArtista);
     	TextView textAlbum = (TextView) view.findViewById(R.id.textAlbum);
@@ -53,11 +62,14 @@ public class RequestTaskAPI extends AsyncTask<String, Void, String> {
 			Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
 			imgCover.setImageBitmap(decodedByte);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			Log.d("Debug", "Pasando por onPostExecute, Excepcion haciendo la conversion de base64 " + e);
 			e.printStackTrace();
 		}
-    	
+    	/* 
+    	 * GUARDANDO EN LA BASE DE DATOS
+    	 */
+    	MainActivity.getDBHelper().saveTrackInfo(current_track.getTitle(), current_track.getArtist(), current_track.getAlbum(),
+				current_track.getCountry(), current_track.getYear() + "|" + current_track.getLicense(), strBase64);
+		
     }
 	
 	

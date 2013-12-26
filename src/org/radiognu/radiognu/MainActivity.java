@@ -1,5 +1,6 @@
 package org.radiognu.radiognu;
 
+import org.radiognu.radiognu.db.DBHelper;
 import org.radiognu.radiognu.fragments.MainFragment;
 import org.radiognu.radiognu.fragments.PlayerFragment;
 
@@ -7,23 +8,45 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity {
-	  private MenuItem menuItem;
-
+	 private MenuItem menuItem;
+	 private static DBHelper dbhelper;
+	 private static String imgRadioGNU;
+	 private static Context context;
+	 private static int estatusPlayStreaming = 0; /* Stop */
+	 private static boolean play = false;
+	 public static boolean isPlay() {
+		return play;
+	}
+	public static void setPlay(boolean play) {
+		MainActivity.play = play;
+	}
+	public static boolean isEstatusServicio() {
+		return estatusServicio;
+	}
+	public static void setEstatusServicio(boolean estatusServicio) {
+		MainActivity.estatusServicio = estatusServicio;
+	}
+	private static boolean estatusServicio = false;
 	
+ 	public static int getEstatusPlayStreaming() {
+		return estatusPlayStreaming;
+	}
+	public static void setEstatusPlayStreaming(int i) {
+		MainActivity.estatusPlayStreaming = i;
+	}
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@SuppressLint("NewApi")
 	@Override
@@ -51,7 +74,12 @@ public class MainActivity extends FragmentActivity {
          */
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
 	        | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
+     
+        dbhelper = new DBHelper(this);
+        imgRadioGNU = getResources().getString(R.string.IMG_RADIOGNU);
+        context = this;
 	}
+ 	public static Context getContext() { return context; }
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -99,12 +127,11 @@ public class MainActivity extends FragmentActivity {
 	  };
 	  @Override
 		public void onBackPressed() {
-			Log.d("Depurando","onBackPressed");
 			new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("Closing Activity")
-	        .setMessage("Are you sure you want to close this activity?")
-	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	        .setTitle(getResources().getString(R.string.message_title_exit_app))
+	        .setMessage(getResources().getString(R.string.message_exit_app))
+	        .setPositiveButton(getResources().getString(R.string.botonYes_message_exit_app), new DialogInterface.OnClickListener()
 	    {
 	        @Override
 	        public void onClick(DialogInterface dialog, int which) {
@@ -119,4 +146,10 @@ public class MainActivity extends FragmentActivity {
 	    .show();
 		
 		}
+	  public static DBHelper getDBHelper() { 
+		  return dbhelper;
+	  }
+	  public static String getImgRadioGNU() { 
+		  return imgRadioGNU;
+	  }
 }

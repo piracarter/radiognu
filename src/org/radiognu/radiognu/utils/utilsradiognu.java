@@ -38,10 +38,7 @@ public class utilsradiognu {
         		throw new IOException(statusLine.getReasonPhrase());
         	}
         }catch (Exception e) {
-        	Log.d("Test", "Couldn't make a successful request!");
-        	Log.d("Response", "Respuesta Entro a Excepcion: " + e);
         }
-        Log.d("Response", "Respuesta " + responseString);
         return responseString;
 	}
 	public static final track updateTrack(String response) { 
@@ -58,7 +55,6 @@ public class utilsradiognu {
 			current_track.setLicense(jsonLicense.getString("shortname"));
 			current_track.setStrImageBase64(jsonResponse.getString("cover"));
 		}catch (Exception ex) { 
-			Log.d("Debug", "Respuesta " + ex );
 		}
 		return current_track;
 	}

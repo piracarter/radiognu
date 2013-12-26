@@ -1,6 +1,7 @@
 package org.radiognu.radiognu;
 import java.io.IOException;
 
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,7 +12,6 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 
 public class serviceplayerstreaming  extends Service  {
@@ -49,16 +49,26 @@ public class serviceplayerstreaming  extends Service  {
 		filter.addAction("FINISH_APP");
 		registerReceiver(receiver, filter);
 		
-		Log.d("Depurando","metodo onCreate()");
 	}
 	class Player extends AsyncTask<String, Void, Boolean> {
-	    //private ProgressDialog progress;
+	    private ProgressDialog progressDialog;
 
+	    @Override
+	    protected void onPreExecute() {
+	        super.onPreExecute();
+	        progressDialog = new ProgressDialog(MainActivity.getContext());
+			progressDialog.setMessage(getResources().getString(R.string.message_conn2));
+			progressDialog.setCancelable(false);
+			progressDialog.show();
+	        //this.progress.setMessage("Buffering...");
+	        //this.progress.show();
+
+	    }
+	    
 	    @Override
 	    protected Boolean doInBackground(String... params) {
 	        Boolean prepared;
 	        try {
-	        	Log.d("Debug", "Pasando " + params[0]);
 	            mediaPlayer.setDataSource(params[0]);
 
 	            mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
@@ -71,8 +81,8 @@ public class serviceplayerstreaming  extends Service  {
 	            });
 	            mediaPlayer.prepare();
 	            prepared = true;
+	            MainActivity.setEstatusPlayStreaming(1); /* Se esta reproduciendo el streaming */
 	        } catch (IllegalArgumentException e) {
-	            Log.d("IllegarArgument", e.getMessage());
 	            prepared = false;
 	            e.printStackTrace();
 	        } catch (SecurityException e) {
@@ -82,7 +92,6 @@ public class serviceplayerstreaming  extends Service  {
 	            prepared = false;
 	            e.printStackTrace();
 	        } catch (IOException e) {
-	        	Log.d("Depurando","Error al iniciar el servicio");
 	        	prepared = false;
 	            e.printStackTrace();
 	        }
@@ -91,15 +100,13 @@ public class serviceplayerstreaming  extends Service  {
 
 	    @Override
 	    protected void onPostExecute(Boolean result) {
-	        
-	        Log.d("Prepared", "//" + result);
+	        progressDialog.dismiss();
 	        if (result) {
 	        	mediaPlayer.start();
 	        }
 	        else
 	        {
 	        	mediaPlayer.reset();
-	        	Log.d("Depurando","Reseteando el mediaplayer");
 	        	
 	        	Intent broadcastIntent = new Intent();
 	            broadcastIntent.setAction("NOTIFY_SERVICE");         
@@ -114,13 +121,7 @@ public class serviceplayerstreaming  extends Service  {
 	        //progress = new ProgressDialog(getActivity());
 	    }
 
-	    @Override
-	    protected void onPreExecute() {
-	        super.onPreExecute();
-	        //this.progress.setMessage("Buffering...");
-	        //this.progress.show();
-
-	    }
+	    
 	}
 	public class LocalBinder extends Binder {
         public serviceplayerstreaming getService() {
@@ -131,11 +132,7 @@ public class serviceplayerstreaming  extends Service  {
 		   @Override
 		   public void onReceive(Context context, Intent intent) {
 		      String action = intent.getAction();
-	          Log.d("Depurando ","***************************************");
-              Log.d("Depurando ","***************************************");
-              Log.d("Depurando ","***************************************");
-              Log.d("Depurando action", action);
-		
+	   		
 		      if(action.equals("NOTIFY_AUDIO")){
 		        /*
 		         * En caso de enviar stop
@@ -144,11 +141,8 @@ public class serviceplayerstreaming  extends Service  {
 		        if (intent.getStringExtra("state").equals("stop"))  { 
 		        	if (mediaPlayer.isPlaying()) {
 		        		mediaPlayer.pause();     
-		                Log.d("Depurando ","***************************************");
-		                Log.d("Depurando ","***************************************");
-		                Log.d("Depurando ","***************************************");
-		                Log.d("Depurando ","mediaPlayer stop");
-					}
+		         
+		                MainActivity.setEstatusPlayStreaming(0);					}
 		        }
 		        /*
 		         * En caso de enviar resume
@@ -156,10 +150,9 @@ public class serviceplayerstreaming  extends Service  {
 		        if (intent.getStringExtra("state").equals("resume"))  { 
 		        	if (!mediaPlayer.isPlaying()) {
 		        		mediaPlayer.start();     
-		                Log.d("Depurando ","***************************************");
-		                Log.d("Depurando ","***************************************");
-		                Log.d("Depurando ","***************************************");
-		                Log.d("Depurando ","mediaPlayer resume");
+		              
+		                MainActivity.setEstatusPlayStreaming(1);					
+
 					}
 		        }
 		        
@@ -169,6 +162,8 @@ public class serviceplayerstreaming  extends Service  {
 		};
 		public void stopService() { 
 			this.stopSelf();
+			MainActivity.setEstatusPlayStreaming(0);
+			MainActivity.setPlay(false);
 		}
 		
 }

@@ -7,22 +7,34 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-	<uses-permission android:name="android.permission.INTERNET" /> 
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/radiognuavatar"
+        android:icon="@drawable/radiognu"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name="org.radiognu.radiognu.MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
+            <!-- intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter-->
+        </activity>
+        <activity
+            android:name="org.radiognu.radiognu.SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+ 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <service android:name=".serviceplayerstreaming" />
     </application>
 
-</manifest>
+</manifest>	

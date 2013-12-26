@@ -2,17 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:orientation="vertical" >
 
     <LinearLayout 
         android:orientation="vertical"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
 	    android:layout_width="match_parent"
 	    android:layout_height="0px"
-	    android:layout_weight="6">
+	    android:layout_weight="7">
 
-        <LinearLayout
+        <!--LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" 
@@ -33,7 +34,7 @@
 	            style="@style/NoLive"
 	         />
         
-        </LinearLayout>
+        </LinearLayout-->
         
         <ImageView
             android:id="@+id/imageTrack"
@@ -42,15 +43,17 @@
             android:layout_weight="20"
             android:contentDescription="@string/contentImagePlayer"
             android:scaleType="fitXY"
-            android:src="@drawable/radiognuavatar" />
+            android:src="@drawable/radiognu" />
 		
-		<TextView 
+		<TextView
+		    	style="@style/textNormalFragmentPlayer" 
 		        android:id="@+id/textTitulo"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:text="@string/TituloTrack"
 		    />
 		<TextView 
+		    style="@style/textNormalFragmentPlayer"
 		        android:id="@+id/textArtista"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -58,6 +61,7 @@
 		    />
 		
 				<TextView 
+				    style="@style/textNormalFragmentPlayer"
 		        android:id="@+id/textAlbum"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -67,6 +71,7 @@
 
 		
 		<TextView 
+		    style="@style/textNormalFragmentPlayer"
 		        android:id="@+id/textCountry"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -75,6 +80,7 @@
 		    />
 		
 		<TextView 
+		    style="@style/textNormalFragmentPlayer"
 		        android:id="@+id/textyearlicence"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
@@ -92,28 +98,45 @@
 		
 	</LinearLayout>
     
-    <LinearLayout 
-        android:orientation="horizontal"
-    	android:layout_width="match_parent"
+    <RelativeLayout 
+        android:layout_width="match_parent"
     	android:layout_height="0px"
     	android:layout_weight="1">
 
         <ImageView
+            android:layout_centerInParent="true"
             android:id="@+id/imageControlRadio"
             android:contentDescription="@string/contentImagePlayStop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/play32" />
-		<TextView 
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_media_play" />
+		<!--TextView 
 		    	android:layout_marginTop="5dp"
 		    	android:layout_marginLeft="10dp"
 		        android:id="@+id/textMessageRadio"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:text="@string/MessageRadio"
-		    />		
+		    /-->
+
         
+    </RelativeLayout>
+
+    <LinearLayout 
+        android:orientation="vertical"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+	    android:layout_width="match_parent"
+	    android:layout_height="0px"
+	    android:layout_weight="1">
+        
+        <SeekBar
+            android:id="@+id/sbVolume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageControlRadio"
+            android:layout_alignParentLeft="true" />
         
     </LinearLayout>
-
+    
 </LinearLayout>

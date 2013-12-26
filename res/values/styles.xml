@@ -34,5 +34,8 @@
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="textNormalFragmentPlayer">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
     
 </resources>
