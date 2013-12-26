@@ -24,7 +24,7 @@ Código disponible en https://github.com/piracarter/radiognu/
 
 Instalación
 =========================================================================
-1 Bajar el archivo 
+1 Bajar el archivo de aplicación Android en formato .apk que se encuentra en el directorio bin/radiognu.apk.
 
 2 Para instalar las apps en nuestro Android debemos tener en cuenta que tengan extensión .APK. Una vez descargadas en nuestro PC, las pasamos a nuestro móvil o tablet con el cable usb, o desde la flash card, para que queden almacenadas en la memoria externa. Y a contunuación pinchar en 'Ajustes'.
 
