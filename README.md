@@ -13,7 +13,7 @@ Indice
 
 Requerimientos
 =========================================================================
-Android con SDK 17 o superior (Android 4.1.2) Jelly Bean. 
+Android con SDK 16 o superior (Android 4.1) Jelly Bean. 
 	
 
 Características generales
